@@ -1,0 +1,58 @@
+#CPE 202 - Lab 3
+#Name: Ajay Patel 
+#Section: 11
+#Instructor: S. Einakian
+
+from queues import*
+
+import unittest
+
+class TestCase(unittest.TestCase):
+
+      def test_is_empty(self):
+          q1 = QueueArray(2)
+          q1.enqueue(1)
+          q1.enqueue('test')
+          q2 = QueueArray(2)
+          self.assertFalse(q1.is_empty())
+          self.assertTrue(q2.is_empty())
+          
+      def test_is_full(self):
+          q1 = QueueArray(2)
+          q1.enqueue(1)
+          q1.enqueue('test')
+          q2 = QueueArray(2)
+          q2.enqueue(1)
+          self.assertTrue(q1.is_full())
+          self.assertFalse(q2.is_full())      
+
+      def test_enqueue(self):
+          q1 = QueueArray(2)
+          q1.enqueue(1)
+          self.assertEqual(q1.enqueue('test'), None)
+          q2 = QueueArray(2)
+          q2.enqueue('string')
+          q2.dequeue()
+          self.assertEqual(q2.enqueue(2), None)
+          self.assertEqual(q2.enqueue(1), None)
+          with self.assertRaises(IndexError):
+               q2.enqueue('name')
+
+      def test_dequeue(self):
+          q1 = QueueArray(2)
+          q1.enqueue(1)
+          q1.enqueue('test')
+          self.assertEqual(q1.dequeue(), 1)
+          q2 = QueueArray(2)
+          q2.enqueue(1)
+          q2.enqueue(2)
+          q2.dequeue()
+          self.assertEqual(q2.dequeue(), 2)
+
+
+# Run the unit tests.
+if (__name__ == '__main__'):
+    unittest.main()
+
+
+

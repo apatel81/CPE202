@@ -1,0 +1,62 @@
+#CPE 202 - Lab 8
+#Name: Ajay Patel
+#Section: 11
+#Instructor: S. Einakian
+
+class MyHashTable:
+
+   #To create a hash table of size 11
+   #int(size) --> None
+   def __init__(self, size = 11):
+       self.size = size
+       self.num_of_pairs = 0
+       self.num_of_collisions = 0
+       self.hash_table = [[] for _ in range(11)]
+
+
+   #To insert an item into the Hash Table based on hash value. Need to consider
+   #load factor and rehasing
+   #key, item --> None
+   def insert(self, key, item):
+       if self.size() > 1.5:
+
+
+
+       else:
+          hash_value = key % self.size
+          index = hash_value
+          repeat = False
+          for item in self.hash_table[hash_value]:
+              if item[1] == key:
+                 self.hash_table[
+          self.hash_table[hash_value].append((key, item))
+
+
+   #To return the item in the hash table using its key 
+   #int(key) --> item
+   def get(self, key):
+       pass
+
+
+   #To remove the item in the hash table using its key
+   #int(key) --> item 
+   def remove(self, key):
+       pass
+
+
+   #To return the number of key-item pairs in the hash table
+   #None --> int
+   def size(self):
+       return self.num_of_pairs
+
+
+   #To return the current load factor of the hash table
+   #None --> float
+   def load_factor(self):
+       return self.num_of_pairs/self.size
+
+
+   #To return the number of collisions that have occurred in the hash table 
+   #None --> int
+   def collisions(self):
+       return self.num_of_collisions

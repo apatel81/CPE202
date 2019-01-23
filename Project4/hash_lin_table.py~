@@ -1,0 +1,197 @@
+#Project 4 - Hash Table Linear Probing
+#Name: Ajay Patel
+#Instructor: S. Einakian
+#Section: 11
+
+
+class HashTableLinPr:
+
+   #To create a hash table with a designated size
+   #int(size) --> None
+   def __init__(self, size = 251):
+       self.table_size = size
+       self.hash_table = [None] * self.table_size
+       self.words = []
+       self.stop = []
+       self.stop_size = size
+       self.stop_table = [None] * size
+
+
+   #To read words from stop word file and place them in a hash table
+   #file --> None
+   def read_stop(self, filename):
+       file = open(filename, 'r')
+       line = file.readline()
+       prestop = []
+       while line:
+          for i in range(len(line) - 1):
+              line = line.rstrip()
+              print(line)
+          line = file.readline()
+       file.close()    
+       """for word in prestop:
+           for letter in word:
+               if ord(letter) in range(33,65):
+                  index = word.index(letter)
+                  first = word[:index]
+                  second = word[index + 1:]
+                  word = first + second
+                  self.stop.append(word)
+
+               elif ord(letter) in range(91,97):
+                  index = word.index(letter)
+                  first = word[:index]
+                  second = word[index + 1:]
+                  word = first + second
+                  self.stop.append(word)
+
+               elif ord(letter) in range(123,127):
+                  index = word.index(letter)
+                  first = word[:index]
+                  second = word[index + 1:]
+                  word = first + second
+                  self.stop.append(word)
+
+           self.stop.append(word)
+
+
+       while len(self.stop)/self.stop_size > .75:
+          self.stop_size = self.stop_size * 2 + 1
+
+       #print(len(prestop))
+       #print(self.stop_size)
+       #print(len(self.stop))
+       self.stop_table = [None] * self.stop_size
+       #print(len(self.stop_table))
+
+       for i in range(len(self.stop)):
+           hash_value = self.myhash(self.stop[i], self.stop_size)
+           #print(hash_value)
+           if len(self.stop)/self.stop_size > .75:
+              self.stop_size = self.stop_size * 2 + 1
+              print(self.stop_size)
+
+           if hash_value > self.stop_size:
+              hash_value = hash_value % self.stop_size
+              #print(hash_value)
+           n = 0 
+           while self.stop_table[hash_value] != None:
+              #print(hash_value)
+              n += 1
+              if hash_value + n > self.stop_size:
+                 hash_value = (hash_value + n) % self.stop_size
+              else:              
+                 hash_value += n 
+
+           self.stop_table[hash_value] = self.stop[i]"""
+     
+
+   #To read words in the input file and insert into hash table 
+   #filename, stop_table --> None
+   def read_file(self, filename, stop_table):
+       pass
+
+
+   #To return the size of the hash table 
+   #None --> int
+   def get_tablesize(self):
+       return self.stop_size
+
+   
+   #To return the output of words and frequencies
+   #output filename --> None
+   def save_concordance(self, output_filename):
+       pass
+
+
+   #To return the load factor of the Hash Table
+   #None --> int
+   def get_load_fact(self):
+       return (len(self.words) / self.stop_size)
+
+
+   #To return the hash value integer for the hash table
+   #int(key), int(table size) --> int
+   def myhash(self, key, table_size):
+       n = min(len(key), 8)
+       hash_value = 0 
+       for index in range(n):
+           hash_value = hash_value + ord(key[index]) * 31**(n-1-index)
+       return int(hash_value % table_size)
+
+
+
+ht = HashTableLinPr()
+ht.read_stop("stop_words.txt")
+
+
+
+
+
+"""   #To read words from stop word file and place them in a hash table
+   #file --> None
+   def read_stop(self, filename):
+       file = open(filename, 'r')
+       input = file.readlines()
+       prestop = []
+       for line in input:
+           line = line.rstrip()
+           if line:
+              ref = line.split()
+           prestop.append(line)
+
+       for word in prestop:
+           for letter in word:
+               if ord(letter) in range(33,65):
+                  index = word.index(letter)
+                  first = word[:index]
+                  second = word[index + 1:]
+                  word = first + second
+                  self.stop.append(word)
+
+               elif ord(letter) in range(91,97):
+                  index = word.index(letter)
+                  first = word[:index]
+                  second = word[index + 1:]
+                  word = first + second
+                  self.stop.append(word)
+
+               elif ord(letter) in range(123,127):
+                  index = word.index(letter)
+                  first = word[:index]
+                  second = word[index + 1:]
+                  word = first + second
+                  self.stop.append(word)
+
+           self.stop.append(word)
+
+       while len(self.stop)/self.stop_size > .75:
+          self.stop_size = self.stop_size * 2 + 1
+
+       #print(len(prestop))
+       #print(self.stop_size)
+       #print(len(self.stop))
+       self.stop_table = [None] * self.stop_size
+       #print(len(self.stop_table))
+
+       for i in range(len(self.stop)):
+           hash_value = self.myhash(self.stop[i], self.stop_size)
+           #print(hash_value)
+           if len(self.stop)/self.stop_size > .75:
+              self.stop_size = self.stop_size * 2 + 1
+              print(self.stop_size)
+
+           if hash_value > self.stop_size:
+              hash_value = hash_value % self.stop_size
+              #print(hash_value)
+           n = 0
+           while self.stop_table[hash_value] != None:
+              #print(hash_value)
+              n += 1
+              if hash_value + n > self.stop_size:
+                 hash_value = (hash_value + n) % self.stop_size
+              else:
+                 hash_value += n
+
+           self.stop_table[hash_value] = self.stop[i]"""
+

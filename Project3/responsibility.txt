@@ -1,0 +1,6 @@
+"""Rather than dividing the work and combining our code, we decided to work 
+on the project after our classes on Tuesday, Wednesday, and Thursday after 
+because we have the exact same schedule. Also, we used Lab time to work on the
+project as well. Overall, it was a collaborative effort to create and test 
+functions. As each function was made, we would test the function to ensure that
+it worked as desired before preceding onward."""

@@ -1,0 +1,116 @@
+#CPE 202 - Lab 9 
+#Name: Ajay Patel
+#Section: 11
+#Instructor: S. Einakian
+
+from stack_array import*
+
+"""class Vertex:
+ 
+   #A vertex is an ID and a dictionary will represent the connected vertices
+   def __init__(self, key):
+       self.key = key
+       self.connectedTo = {}
+
+
+   #To add a vertex that is connected to another vertex through an edge
+   #key, weight --> None 
+   def add_neighbor(self, key, weight = 0):
+       self.connectedTo[key] = weight
+
+
+   #To return the keys of our connected vertices
+   #None --> ints
+   def getConnection(self):
+       return self.connectedTo.keys()"""
+
+
+
+class MyGraph:
+
+   #To create a graph using an adjacency list by reading an input file
+   #filename --> None
+   def __init__(self, filename):
+       self.vertlist = {}
+       self.num_of_vertices = 0
+       linenumber = 1
+       file = open(filename, 'r')
+       for line in file:
+           if linenumber == 1:
+              number_of_vertices = line
+              linenumber += 1
+              self.adjmatrix = [[] for _ in range(int(number_of_vertices)+1)]              
+           elif linenumber == 2:
+              number_of_edges = line
+              linenumber += 1
+           else:
+              self.adjmatrix[int(line[0])].append(line[2])
+              self.adjmatrix[int(line[2])].append(line[0])
+              
+              linenumber += 1
+              
+
+       print(self.adjmatrix)
+
+
+   """#To add a vertex to graph 
+   #key --> None
+   def add_vertex(self, key):
+       self.num_of_vertices += 1
+       new_vertex = Vertex(key)
+       self.vertlist[key] = new_vertex
+
+
+   #To add an edge to represent the connection betweeen vertices
+   #int(v1), int(v2), weight --> None
+   def add_edge(self, f, t, weight = 0):
+       if f not in self.vertlist:
+          self.add_vertex(f)
+       if t not in self.vertlist:
+          self.add_vertex(t)
+       self.vertlist[f].add_neighbor(self.vertlist[t], weight)
+
+
+   def __iter__(self):
+       return iter(self.vertlist.values())
+
+
+   def adjacencyList(self):
+       if len(self.vertlist) >= 1:
+          return [str(key) + ":" + str(self.vertlist[key]) for key in self.vertlist.keys()]  
+       else:
+          return dict()"""
+
+
+
+   #To return a list of lists representing the vertices that are connected in each list
+   #None --> list of lists
+   def conn_components(self):
+       cclist = []
+       for i in range(len(adjmatrix):
+           templist = []
+           my_stack = StackArray(int(number_of_vertices))
+           if len(adjmatrix[i]) == 0:
+              pass
+           else:
+              for item in adjmatrix[i]:
+                  temp = item
+                  my_stack.push(temp)
+
+
+
+
+
+g = MyGraph('test.txt')
+#g.conn_components()
+
+
+#print(g.vertlist)
+#for x in g.vertlist:
+    #print(g.vertlist[x].key)
+
+#for v in g:
+   #for w in v.getConnection():
+      #print(v.key, w.key)
+#print("")
+#print(g.adjacencyList)

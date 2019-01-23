@@ -1,0 +1,156 @@
+#CPE 202 - Project 3
+#Name: Ajay Patel and Jack Langston
+#Section: 11
+#Instructor: S. Einakian 
+
+
+import sys
+args = sys.argv
+
+class HuffmanNode:
+   def __init__(self, char, freq):
+      self.char = char  
+      self.freq = freq
+      self.left = None
+      self.right = None
+
+   def set_code (self, code):
+      self.code = code
+
+   def set_left (self, node):
+      self.left = node
+
+   def set_right (self, node):
+      self.right = node
+
+
+
+class HuffmanTree:
+   def __init__(self):
+       self.root = None
+
+
+
+
+"""returns true if tree rooted at node a comes before tree rooted at node b """
+def comes_before (a, b) :
+    if a.freq < b.freq:
+       return True
+    elif a.freq == b.freq and ord(a.char) < ord(b.char):
+       return True
+    else:
+       return False
+    
+   
+
+#To count the frequency of strings in file and append frequency to list with ASCII values
+#file --> list
+def cnt_freq(filename): 
+    file = open(filename, 'r')  
+    empty = []
+    for line in file:      #takes whole string
+        for elements in line:     #takes each character in string
+            empty.append(elements)    #appends each character to empty list
+
+    freq = {}        #creates a dictionary so we can store values with frequency 
+    for character in empty:
+        if not character in freq:        
+           freq[character] = 0
+        freq[character] += 1
+
+
+    final_list = [0] * 256    
+    for x,y in freq.items():      #to see corresponding string and frequency
+        x = ord(x)                #changes the string to ASCII value
+        final_list[x] = y         #appends frequency to index = ASCII value
+
+    return final_list
+
+ 
+def create_huff_tree(char_freq):
+    huff_list = []
+    for i in range(len(char_freq)):
+        if char_freq[i] > 0:
+           node = HuffmanNode(chr(i), char_freq[i])
+           huff_list.append(node)
+
+    
+    for nodes in huff_list:
+        print(nodes.freq)
+
+    min1 = find_min(huff_list)
+    min2 = findNextMin(huff_list, min1)
+
+    newtree = combine(min1, min2)
+    print(newtree.freq, newtree.char)    
+
+
+
+
+
+
+
+
+
+
+def find_min(nodelist):
+    minfreq = nodelist[0]
+    for node in nodelist:
+        if node.freq < minfreq.freq:
+           minfreq = node
+        elif node.freq == minfreq.freq:
+           if ord(node.char) < ord(minfreq.char):
+              minfreq = node
+           
+    return minfreq
+
+def findNextMin(nodelist, minfreq):
+    for node in nodelist:
+        if node.freq == minfreq.freq and node.char == minfreq.char:
+           nodelist.remove(node)
+    return find_min(nodelist)
+
+
+
+def combine (a, b) :
+ 
+   if ord(a.char) > ord(b.char):
+      newchar = ord(b.char)
+   else:
+      newchar = ord(a.char)
+ 
+   newfreq = a.freq + b.freq
+ 
+   if a.freq > b.freq:
+      newleft = b
+      newright = a
+   elif a.freq == b.freq:
+      if ord(a.char) > ord(b.char):
+         newleft = b
+         newright = a
+      else:
+         newleft = a
+         newright = b
+   else: #b.freq>a.freq
+      newright = b
+      newleft = a
+ 
+   newnode = HuffmanNode(newchar,newfreq) #makes new node
+   newnode.left = newleft
+   newnode.right = newright
+   return newnode
+
+def create_code (node):
+   pass
+
+
+def tree_preord (node):
+   pass
+
+
+def huffman_encode(in_file, out_file):
+   pass
+
+
+def huffman_decode(freqs, encoded_file, decode_file):
+   pass
